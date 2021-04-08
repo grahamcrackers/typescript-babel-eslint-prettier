@@ -1,3 +1,4 @@
+// https://robertcooper.me/post/using-eslint-and-prettier-in-a-typescript-project
 // eslint-config-prettier changed with version 8+, you can now just include prettier at the end of the extends array
 
 module.exports = {
