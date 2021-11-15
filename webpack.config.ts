@@ -29,7 +29,22 @@ const config: Configuration = {
             },
             {
                 test: /\.css$/i,
-                use: ['style-loader', 'css-loader'],
+                use: [
+                    'style-loader',
+                    'css-loader',
+                    {
+                        loader: 'postcss-loader',
+                        options: {
+                            postcssOptions: {
+                                plugins: [],
+                            },
+                        },
+                    },
+                ],
+            },
+            {
+                test: /\.svg/,
+                use: ['svg-url-loader'],
             },
         ],
     },
