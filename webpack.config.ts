@@ -9,11 +9,15 @@ interface Configuration extends WebpackConfiguration {
 }
 
 const config: Configuration = {
-    entry: './src/main.ts',
     mode: 'development',
     devtool: 'inline-source-map',
+    entry: './src/index.tsx',
     resolve: {
         extensions: ['.ts', '.tsx', '.js'],
+    },
+    output: {
+        filename: 'bundle.js',
+        path: path.resolve(__dirname, 'dist'),
     },
     module: {
         rules: [
@@ -30,14 +34,14 @@ const config: Configuration = {
         ],
     },
     devServer: {
-        contentBase: path.join(__dirname, 'public'),
+        static: {
+            directory: path.join(__dirname, 'public'),
+        },
+        historyApiFallback: true,
         compress: true,
         port: 4444,
     },
-    output: {
-        filename: 'bundle.js',
-        path: path.resolve(__dirname, 'dist'),
-    },
+
     plugins: [
         // this works with babel-loader, check the repository examples to work with ts-loader vs babel-loader
         // https://github.com/TypeStrong/fork-ts-checker-webpack-plugin/tree/master/examples
@@ -56,6 +60,7 @@ const config: Configuration = {
         }),
         new HtmlWebpackPlugin({
             template: path.join(__dirname, 'public', 'index.html'),
+            filename: 'index.html',
         }),
     ],
 };
